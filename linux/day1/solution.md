@@ -101,7 +101,7 @@ Here is the brief introduction about tomcat- [tomcat_doc](doc/tomcat.txt)
   
     -sudo apt-get install oracle-java8-installer
 
-![](media/java-install.png)                      
+![](media/java_install.png)                      
 
 checking the version of java
 
@@ -125,11 +125,10 @@ Setting the environment variable for java
 
 Here is the doc - [build_essential](doc/build_essential.txt)
 
-Install logrotate and rotate tomcat's catalina.out log as:
+# TASK7 Install logrotate and rotate tomcat's catalina.out log as:
 
-rotate the log file after 500kb
-
-keep only last 5 files
+* rotate the log file after 500kb
+* keep only last 5 files
 
     - first install logrotate as its already install in ubuntu16.04 so we do have to install it
     - Now go to the /etc/logrotate.d/
@@ -176,7 +175,7 @@ keep only last 5 files
 
     sudo apt-get install git
 
-![](media/git.png)
+![](media/git_install.png)
 
 * What it is and why do we need it?
 
