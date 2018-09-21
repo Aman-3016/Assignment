@@ -18,7 +18,7 @@
                                        
 Change the port for the apache server to 8085 in ports.conf file
 
--sudo vi /etc/apache2/ports.conf
+    -sudo vi /etc/apache2/ports.conf
 
  - add port number using this line in file for ex-  Listen 8085
 
