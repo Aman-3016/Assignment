@@ -1,15 +1,14 @@
-#TASK1 Install and configure apache/httpd
+# TASK1 Install and configure apache/httpd
 
     -sudo apt-get install apache2                                  // to install the apach                                      
     -whereis apache2                             
     
     
-    ![](media/apache_install.png)
+ ![](media/apache_install.png)
 
-#TASK2 
-Install and configure nginx - configure it to run as reverse proxy to apache
+# TASK2 Install and configure nginx - configure it to run as reverse proxy to apache
 
-##STEP1
+## STEP1
 
 
     -sudo apt-get install nginx                                                          // to install the nginx 
@@ -17,7 +16,7 @@ Install and configure nginx - configure it to run as reverse proxy to apache
 
 ![](media/nginx_install.png)
 
-##STEP 2     
+## STEP 2     
                                        
 Change the port for the apache server to 8085 in ports.conf file
 
@@ -31,7 +30,7 @@ After modifying the file restart apache using command
 
 ![](media/apache_port.png)
 
-##Step3
+## Step3
 
 Now using Nginx as reverse proxy for apache
 
@@ -45,7 +44,7 @@ Now using Nginx as reverse proxy for apache
 
 ![](media/reverse_proxy_setup.png)
 
-##Step4
+## Step4
 
 Edit index.html using
 
@@ -64,9 +63,7 @@ And open your browser and type localhost  and you can see here nginx as a revers
 
 ![](media/reverse_proxy.png)
 
-#TASK3
-
-Install and configure 'ntp' - with singapore time zone
+# TASK3 Install and configure 'ntp' - with singapore time zone
  
     -sudo timedatectl set-timezone Asia/Singapore 
     -sudo timedatectl set-ntp no
@@ -75,9 +72,7 @@ Install and configure 'ntp' - with singapore time zone
 
 ![](media/ntp_installation.png)
 
-#TASK4
-
-Install Tomcat version 8
+# TASK4 Install Tomcat version 8
 
     -sudo apt-get install tomcat8
 
@@ -90,27 +85,29 @@ TOMCAT RUNNING at port 9090 as some other service was using port 8080 so i chang
 
 Here is the brief introduction about tomcat- [tomcat_doc](doc/tomcat.txt)
 
-TASK5
+# TASK5  Install java version 8 with home directory set as an environment variable
 
- Install java version 8 with home directory set as an environment variable
-
-Step1-
+## Step1-
 
      -sudo add-apt-repository ppa:webupd8team/java  //adding the oracle's package manager    
 
 ![](media/Adding_oracle_ppa.png)
 
+## Step2-
+
     -sudo apt-get update                            //updating the package manager
 
-    ![](media/update_package_manager.png)           
+![](media/update_package_manager.png)           
   
     -sudo apt-get install oracle-java8-installer
 
-    ![](media/java-install.png)                      
+![](media/java-install.png)                      
 
 checking the version of java
 
-    ![](media/java_version.png)
+ ![](media/java_version.png)
+
+## Step3-
 
 Setting the environment variable for java
     
@@ -118,15 +115,13 @@ Setting the environment variable for java
 
 ![](media/java_home.png)
 
-TASK6
-
-Install 'build essentials' 
+# TASK6 Install 'build essentials' 
 
     -sudo apt-get install build-essential
 
-     ![](media/build_essential_install.png)
+ ![](media/build_essential_install.png)
 
-why do we need build essentials?
+* why do we need build essentials?
 
 Here is the doc - [build_essential](doc/build_essential.txt)
 
@@ -143,28 +138,50 @@ keep only last 5 files
     - inside it write the following whatever is written in the image
   ![](media/logrotate_tomcat.png)
 
-#TASK8
-Make a directory as '/ninja' having one file inside with name 'devops' and share it via nfs & then mount the same on '/mnt'
+# TASK8 Make a directory as '/ninja' having one file inside with name 'devops' and share it via nfs & then mount the same on '/mnt'
+
+ - on host machine ,you have to install nfs-kernel-server
+
+           - sudo apt-get install nfs-kernel-server  
+  ![](media/nfs_server_installation.png)
+
+ - on client machine, we have to install nfs-common
+    
+           - sudo apt-get install nfs-common
+  ![](media/nfs_common_installation.png)
 
 
+ - create directory /ninja and make file Devops inside it 
+        
+            - mkdir  ~/ninja && touch Devops
 
+ - Configuring host machine edit /etc/exports
+       
+            - sudo vi etc/exports
+    add 
+    
+     file_to_share  client_ip(give permission to client)
+     
+     for ex - ~/ninja 18.224.1.130(rw)
+         
+  - Restart the nfs-kernal-server
+        
+            - sudo systemctl nfs-kernel-server restart
 
+ - Configuring the client machine,mounting the shared folder on /mnt
+ 
+         mount -t nfs <host-machine-ip>:~/ninja   /mnt
 
-
-
-
-#TASK9
-Install git 
+# TASK9 Install git 
 
     sudo apt-get install git
 
 ![](media/git.png)
 
-What it is and why do we need it?
+* What it is and why do we need it?
 
 Brief introduction about git - [git](doc/git.txt)
 
-#TASK10
-After installing above check the respective logs if everything is installed and running.
+# TASK10 After installing above check the respective logs if everything is installed and running.
 
 ![](media/log_report.png)

@@ -19,3 +19,4 @@ keep only last 5 files
 * Install git (a brief explaination about - what it is and why do we need it in doc)
 * After installing above check the respective logs if everything is installed and running (mention the log files name in doc)
 * Also mention other files got created with software installation
+~                                                                 
