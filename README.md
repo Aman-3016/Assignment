@@ -1,2 +1,2 @@
 # Linux
-A repository for linux training
+A repository for linux Assignments with its solution
