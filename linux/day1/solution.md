@@ -1,7 +1,7 @@
 # TASK1 Install and configure apache/httpd
 
-    -sudo apt-get install apache2                                  // to install the apach                                      
-    -whereis apache2                             
+    -sudo apt-get install apache2                                  // to install the apache                                    
+    -whereis apache2                                               // to see which files got configured while installing apache
     
     
  ![](media/apache_install.png)
@@ -9,8 +9,6 @@
 # TASK2 Install and configure nginx - configure it to run as reverse proxy to apache
 
 ## STEP1
-
-
     -sudo apt-get install nginx                                                          // to install the nginx 
     -whereis nginx                                                                       // to see the location of the files to execute nginx. For ex-configuration file,libraries etc
 
@@ -20,7 +18,7 @@
                                        
 Change the port for the apache server to 8085 in ports.conf file
 
-    -sudo vi /etc/apache2/ports.conf
+-sudo vi /etc/apache2/ports.conf
 
  - add port number using this line in file for ex-  Listen 8085
 
@@ -39,7 +37,8 @@ Now using Nginx as reverse proxy for apache
 - by giving the server_ip and port and at which apache2 is running by adding this line
    
    location /{
-       proxy_pass http://localhost:8085         // proxy_pass  http://server_ip:port of the backend server
+
+     proxy_pass http://localhost:8085         // proxy_pass  http://server_ip:port of the backend server
          }
 
 ![](media/reverse_proxy_setup.png)
@@ -99,7 +98,7 @@ Here is the brief introduction about tomcat- [tomcat_doc](doc/tomcat.txt)
 
 ![](media/update_package_manager.png)           
   
-    -sudo apt-get install oracle-java8-installer
+    -sudo apt-get install oracle-java8-installer    //installing java
 
 ![](media/java_install.png)                      
 
@@ -126,16 +125,16 @@ Setting the environment variable for java
 Here is the doc - [build_essential](doc/build_essential.txt)
 
 # TASK7 Install logrotate and rotate tomcat's catalina.out log as:
-
-* rotate the log file after 500kb
-* keep only last 5 files
-
+```
+ rotate the log file after 500kb
+ keep only last 5 files
+```
     - first install logrotate as its already install in ubuntu16.04 so we do have to install it
     - Now go to the /etc/logrotate.d/
     - create the tomcat name file and edit it . for ex- vi tomcat
     - give the path of the file of which the logs are to be rotate 
     - inside it write the following whatever is written in the image
-  ![](media/logrotate_tomcat.png)
+![](media/logrotate_tomcat.png)
 
 # TASK8 Make a directory as '/ninja' having one file inside with name 'devops' and share it via nfs & then mount the same on '/mnt'
 
