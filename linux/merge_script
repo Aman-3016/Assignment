@@ -1,0 +1,50 @@
+#!/bin/bash
+CONFLICTING_FILE_LIST="/tmp/conflict_files.lst"
+
+function merge_branches() {
+SOURCE_BRANCH=$1
+TARGET_BRANCH=$2
+git checkout ${TARGET_BRANCH}
+git merge ${SOURCE_BRANCH}
+list_conflicting_files
+if [ -s ${CONFLICTING_FILE_LIST} ]; then
+  echo "conflicting file exists, reverting merge"
+  revert_merge
+  echo "Listing author of conflicting files in"
+  list_conflicting_files_author ${SOURCE_BRANCH} ${TARGET_BRANCH}
+  exit 1
+fi
+}
+
+function revert_merge() {
+git merge --abort
+}
+
+function list_conflicting_files_author() {
+SOURCE_BRANCH=$1
+TARGET_BRANCH=$2
+while read conflictFile; do
+  echo -e "\n********************************************"
+  echo "********************************************"
+  echo "Author of conflicting file ${conflictFile} in respective branches"
+  print_author_email ${SOURCE_BRANCH} ${conflictFile}
+  print_author_email ${TARGET_BRANCH} ${conflictFile}
+done < ${CONFLICTING_FILE_LIST}
+}
+
+function print_author_email() {
+BRANCH=$1
+FILE=$2
+git checkout ${BRANCH}
+
+git log -n 1  --pretty=format:"%aE," ${FILE} >> EMAIL_ID.cfg
+}
+
+function list_conflicting_files() {
+git diff --name-only --diff-filter=U > ${CONFLICTING_FILE_LIST}
+
+cat ${CONFLICTING_FILE_LIST}
+}
+
+
+merge_branches ${SOURCE_BRANCH} ${TARGET_BRANCH}
